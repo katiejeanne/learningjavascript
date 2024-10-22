@@ -54,16 +54,81 @@ const restaurant = {
   },
 };
 
-const rest1 = {
-  name: 'Capri',
-  //   numGuests: 20,
-  numGuests: 0,
-};
+// // ------------LOOPING OBJECTS-----------------
+// const properties = Object.keys(restaurant.openingHours);
+// console.log(properties);
 
-const rest2 = {
-  name: 'La Piezze',
-  owner: 'Guy',
-};
+// let openStr = `We are open on ${properties.length} days: `;
+// for (const day of properties) {
+//   openStr += `${day}, `;
+// }
+// console.log(openStr);
+
+// for (const day of Object.keys(restaurant.openingHours)) {
+//   console.log(day);
+// }
+
+// // Property VALUES
+
+// const values = Object.values(restaurant.openingHours);
+// console.log(values);
+
+// // Entries return the index number and the element itself.
+// // On objects use Object.entries(objectName)
+// // Returns the key then the VALUE
+
+// const entries = Object.entries(restaurant.openingHours);
+// console.log(entries);
+
+// for (const [key, { open, close }] of entries) {
+//   console.log(`On ${key} we open at ${open} and close at ${close}`);
+// }
+// /
+// /
+// /
+// /
+// /
+
+// --- OPTIONAL CHAINING -----
+
+// if (restaurant.openingHours.mon) {
+//   console.log(restaurant.openingHours.mon.open);
+// }
+
+// // WITH OPTIONAL CHAINING - only if the property before the question exists will the following property be read, otherwise it will return undefined. Otherwise would return a reference error.
+// console.log(restaurant.openingHours.mon?.open);
+// console.log(restaurant.openingHours?.mon?.open);
+
+// // Example
+// const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+// for (const day of days) {
+//   const open = restaurant.openingHours[day]?.open ?? 'closed';
+//   console.log(`On ${day}, we open at ${open}`);
+// }
+
+// // Methods
+// console.log(restaurant.order?.(0, 1) ?? 'Method does not exist');
+// console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
+
+// // Arrays
+// const users = [{ name: 'Sally', email: 'email@email.com' }];
+// console.log(users[0]?.name ?? 'User array empty');
+// /
+// /
+// /
+// /
+
+// const rest1 = {
+//   name: 'Capri',
+//   //   numGuests: 20,
+//   numGuests: 0,
+// };
+
+// const rest2 = {
+//   name: 'La Piezze',
+//   owner: 'Guy',
+// };
 
 // OR ASSIGNMENT OPERATOR
 // rest1.numGuests = rest1.numGuests || 10; // Returns num guests from 1 if exists, otherwise 10
@@ -72,17 +137,17 @@ const rest2 = {
 // rest1.numGuests ||= 10; // Does same as above - is same number if it exists, otherwise sets to 10.  WILL TREAT 0 AS FALSY
 // rest2.numGuests ||= 10;
 
-rest1.numGuests ??= 10; // Now only treats NULLISH as falsy, ignores 0 or empty string
-rest2.numGuests ??= 10;
+// rest1.numGuests ??= 10; // Now only treats NULLISH as falsy, ignores 0 or empty string
+// rest2.numGuests ??= 10;
 
 // AND ASSIGNMENT OPERATOR
 // rest1.owner = rest1.owner && '<ANONYMOUS>';
 // rest2.owner = rest2.owner && '<ANONYMOUS>'; // Returns first falsy value, so if there is a value it sets it to what you say, but if there isn't one it leaves it alone.
-rest1.owner &&= '<ANONYMOUS>';
-rest2.owner &&= '<ANONYMOUS>';
+// rest1.owner &&= '<ANONYMOUS>';
+// rest2.owner &&= '<ANONYMOUS>';
 
-console.log(rest1);
-console.log(rest2);
+// console.log(rest1);
+// console.log(rest2);
 
 // // NULLISH COALESCING OPERATOR
 
