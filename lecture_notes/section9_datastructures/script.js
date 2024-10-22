@@ -54,6 +54,159 @@ const restaurant = {
   },
 };
 
+// ------------------WORKING WITH STRINGS------------------
+// const airline = 'TAP Air Portugal';
+// const plane = 'A320';
+
+// console.log(plane[0]); // returns character at location
+// console.log(plane[1]);
+// console.log(plane[2]);
+// console.log('B737'[0]); // returns character at location of given string
+
+// console.log(airline.length); // returns length of string
+// console.log('B737'.length);
+
+// console.log(airline.indexOf('r')); // Postion of FIRST occurence of character
+// console.log(airline.lastIndexOf('r')); // position of LAST occurence of character
+// console.log(airline.indexOf('portugal')); // Returns -1 if it doesn't exist; Also CASE SENSITIVE
+
+// console.log(airline.slice(4));
+// console.log(airline.slice(4, 7)); // Always length is end minus beginning, with first number being firs letter
+
+// console.log(airline.slice(0, airline.indexOf(' '))); // Get the first word (cut off at first space)
+// console.log(airline.slice(airline.lastIndexOf(' ') + 1)); // Get the last word (cut off up to last space)
+
+// console.log(airline.slice(-2)); // Negative values count back from end of string
+// console.log(airline.slice(1, -1)); // Remove the first and last letter
+
+// const checkMiddleSeat = function (seat) {
+//   // B and E are middle seats
+//   const s = seat.slice(-1);
+//   if (s === 'B' || s === 'E') console.log('You have a middle seat.');
+//   else console.log('You have an outside seat');
+// };
+
+// checkMiddleSeat('11B');
+// checkMiddleSeat('23C');
+// checkMiddleSeat('3E');
+
+// console.log(new String('jonas')); // Strings are primitive types in Javascript so it boxes the string as an object, then when the operation is done it turns it back into a string primitive.
+
+// const airline = 'TAP Air Portugal';
+// console.log(airline.toLowerCase());
+// console.log(airline.toUpperCase());
+
+// // Fix capitalization in name
+// const passenger = 'jOnAS'; // Jonas
+// const passengerLower = passenger.toLowerCase();
+// const passengerCorrect =
+//   passengerLower[0].toUpperCase() + passengerLower.slice(1);
+// console.log(passengerCorrect);
+
+// // Comparing emails
+// const email = 'hello@jonas.io';
+// const loginEmail = '  Hello@Jonas.Io \n';
+
+// const lowerEmail = loginEmail.toLowerCase();
+// const trimmedEmail = lowerEmail.trim();
+// console.log(trimmedEmail);
+// const normalizedEmail = loginEmail.toLowerCase().trim(); // All in one
+// console.log(normalizedEmail);
+
+// // replacing
+// const priceGB = '288,97L';
+// const priceUS = priceGB.replace('L', '$').replace(',', '.');
+// console.log(priceUS);
+
+// const announcement =
+//   'Flight 1111111 now boarding at door 23. Please report to door 23.';
+
+// console.log(announcement.replace('door', 'gate')); // Only replaces first occurrence
+// console.log(announcement.replaceAll('door', 'gate')); // Replaces all (new)
+// console.log(announcement.replace(/door/g, 'gate')); // Uses regex to replace all
+
+// // Booleans
+// const plane = 'Airbus A320neo';
+// console.log(plane.includes('A320')); // true
+// console.log(plane.includes('Boeing')); // false
+// console.log(plane.startsWith('Air')); // true
+
+// if (plane.startsWith('Airbus') && plane.endsWith('neo')) {
+//   // Checks if both start and end matches to see if plane belongs to new Airbus family
+//   console.log('Part of the new Airbus family.');
+// }
+
+// // Practice exercise
+// const checkBaggage = function (items) {
+//   const baggage = items.toLowerCase(); // converts to lower case to make comparison easier
+//   if (baggage.includes('knife') || baggage.includes('gun')) {
+//     console.log('You are NOT allowed on board.');
+//   } else {
+//     console.log('Welcome aboard!');
+//   }
+// };
+
+// checkBaggage('I have a laptop, some food, and a pocket Knife');
+// checkBaggage('Socks and camera');
+// checkBaggage('Got some snacks and a gun.');
+
+console.log('a+very+nice+string'.split('+'));
+console.log('Hot Potato'.split(' '));
+
+const [firstName, lastName] = 'Hot Potato'.split(' ');
+
+const fullName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(fullName);
+
+const capitalizeName = function (name) {
+  const names = name.trim().split(' ');
+  const namesUpper = [];
+
+  for (const n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1));
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase())); // Acheives same effect using replace instead of slice
+  }
+  console.log(namesUpper.join(' '));
+};
+
+capitalizeName(' jessica ann smith davis');
+capitalizeName('little miss muffet');
+
+// Padding
+const message = 'Go to gate 23!';
+console.log(message.padStart(20, '+').padEnd(30, '+'));
+console.log('Habakkuk'.padStart(20, '+'));
+
+const maskCreditCard = function (number) {
+  const str = number + ''; // Converts to string by adding empty string and forcing coercion
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*');
+};
+
+console.log(maskCreditCard(926349875629348));
+console.log(maskCreditCard('34983798273947'));
+
+// Repeat
+const message2 = 'Bad weather. All departures delayed. ';
+console.log(message2.repeat(10));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'->'.repeat(n)}`);
+};
+planesInLine(5);
+planesInLine(2);
+planesInLine(12);
+// /
+// /
+// /
+// /
+// /
+// /
+// /
+// /
+// /
+// /
+
 //----------------------MAPS------------------
 // const rest = new Map();
 // rest.set('name', 'Classico Italiano');
@@ -98,34 +251,34 @@ const restaurant = {
 // console.log(rest);
 // // Now you can reference dom object using the value.
 
-const question = new Map([
-  ['question', 'What is the best programming language in the world?'],
-  [1, 'C'],
-  [2, 'Java'],
-  [3, 'Javascript'],
-  ['correct', 3],
-  [true, 'Correct!'],
-  [false, 'Try again!'],
-]);
-console.log(question);
+// const question = new Map([
+//   ['question', 'What is the best programming language in the world?'],
+//   [1, 'C'],
+//   [2, 'Java'],
+//   [3, 'Javascript'],
+//   ['correct', 3],
+//   [true, 'Correct!'],
+//   [false, 'Try again!'],
+// ]);
+// console.log(question);
 
-// Convert object to a map
-console.log(Object.entries(restaurant));
-const hoursMap = new Map(Object.entries(restaurant));
-console.log(hoursMap);
+// // Convert object to a map
+// console.log(Object.entries(restaurant));
+// const hoursMap = new Map(Object.entries(restaurant));
+// console.log(hoursMap);
 
-console.log(question.get('question'));
-for (const [key, value] of question) {
-  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
-}
-const answer = prompt('Your answer');
+// console.log(question.get('question'));
+// for (const [key, value] of question) {
+//   if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+// }
+// const answer = prompt('Your answer');
 
-console.log(question.get(answer == question.get('correct'))); // Here we have nested a logical comparison inside another get so it goes right to getting the response to true or false.
+// console.log(question.get(answer == question.get('correct'))); // Here we have nested a logical comparison inside another get so it goes right to getting the response to true or false.
 
-//Conver map to array
-console.log([...question]);
-console.log([...question.keys()]); // Can also get keys and values from a map like you would from an object
-console.log([...question.values()]);
+// //Conver map to array
+// console.log([...question]);
+// console.log([...question.keys()]); // Can also get keys and values from a map like you would from an object
+// console.log([...question.values()]);
 // /
 // /
 // /
