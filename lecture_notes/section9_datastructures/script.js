@@ -54,6 +54,123 @@ const restaurant = {
   },
 };
 
+//----------------------MAPS------------------
+// const rest = new Map();
+// rest.set('name', 'Classico Italiano');
+// rest.set(1, 'Firenze, Italy');
+// console.log(rest.set(2, 'Lisbon, Portugal')); // The set method returns the new complete math object
+
+// rest
+//   .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+//   .set('open', 11)
+//   .set('close', 23) // you can chain sets one after the other like this
+//   .set(true, 'We are open')
+//   .set(false, 'We are closed');
+// console.log(rest);
+
+// console.log(rest.get('name'));
+// console.log(rest.get(true));
+// console.log(rest.get(11)); // If key does not exist "undefined" is returned
+
+// const time = 21;
+// console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+
+// console.log(rest.has('categories'));
+// rest.delete(2);
+// // rest.clear(); Clear out all data from Map
+// console.log(rest);
+// console.log(rest.size);
+
+// rest.set([1, 2], 'Test'); // [1,2] the array is a particular object
+// console.log(rest);
+// console.log(rest.size);
+
+// console.log(rest.get([1, 2])); // Does not return Test because they are not the same object
+
+// const arr = [1, 2]; // Now the object is defined on its as an object
+// rest.set(arr, 'Test');
+// console.log(rest);
+// console.log(rest.size);
+
+// console.log(rest.get(arr)); // Now we can use the object itself as the key and it works
+
+// rest.set(document.querySelector('h1'), 'Heading');
+// console.log(rest);
+// // Now you can reference dom object using the value.
+
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'Javascript'],
+  ['correct', 3],
+  [true, 'Correct!'],
+  [false, 'Try again!'],
+]);
+console.log(question);
+
+// Convert object to a map
+console.log(Object.entries(restaurant));
+const hoursMap = new Map(Object.entries(restaurant));
+console.log(hoursMap);
+
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+const answer = prompt('Your answer');
+
+console.log(question.get(answer == question.get('correct'))); // Here we have nested a logical comparison inside another get so it goes right to getting the response to true or false.
+
+//Conver map to array
+console.log([...question]);
+console.log([...question.keys()]); // Can also get keys and values from a map like you would from an object
+console.log([...question.values()]);
+// /
+// /
+// /
+// /
+// /
+// /
+// /
+// /
+
+//----------------SETS--------------------
+// const ordersSet = new Set(['Pasta', 'Pizza', 'Pizza', 'Risotto', 'Pasta']);
+// console.log(ordersSet);
+
+// console.log(new Set('Name'));
+
+// console.log(ordersSet.size);
+// console.log(ordersSet.has('Pizza'));
+// console.log(ordersSet.has('Bread'));
+// ordersSet.add('Garlic Bread');
+// ordersSet.add('Garlic Bread');
+// ordersSet.delete('Risotto');
+// console.log(ordersSet);
+// console.log(ordersSet[0]); // There are no indexes or order
+// // ordersSet.clear();
+// // console.log(ordersSet);
+
+// for (const order of ordersSet) console.log(order);
+
+// const staff = ['Watier', 'Chef', 'Watier', 'Manager', 'Chef', 'Waiter'];
+// const staffUnique = new Set(staff);
+// console.log(staffUnique);
+// const staffUniqueArray = [...new Set(staff)]; // takes an array, makes a set then turns it back to an array, removes duplicates
+// console.log(staffUniqueArray);
+// const numPostions = new Set(staff).size; // Just gets the size or number of unqiue values without saving a new array
+// console.log(numPostions);
+// const numLetters = new Set('This is a sentence with many duplicate letters.')
+//   .size; // Sets can also be made from strings.
+// console.log(numLetters);
+// /
+// /
+// /
+// /
+// /
+// /
+
 // // ------------LOOPING OBJECTS-----------------
 // const properties = Object.keys(restaurant.openingHours);
 // console.log(properties);
