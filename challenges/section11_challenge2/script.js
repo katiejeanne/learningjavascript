@@ -35,3 +35,12 @@ const data2 = [16, 6, 10, 5, 6, 1, 4];
 
 console.log(calcAverageHumanAge(data1));
 console.log(calcAverageHumanAge(data2));
+
+// Rewrite above using arrow functions and chaining
+const calcAvgHumanAgeArr = (dogAges) => {
+  return dogAges
+    .map((dogAge) => (dogAge > 2 ? dogAge * 4 + 16 : dogAge * 2))
+    .filter((humanAge) => humanAge >= 18)
+    .reduce((acc, age, _, arr) => acc + age / arr.length, 0);
+};
+console.log(calcAvgHumanAgeArr(data1));
