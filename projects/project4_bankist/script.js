@@ -80,11 +80,28 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
+
+const createUsernames = function (accounts) {
+  accounts.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map((indName) => indName[0])
+      .join('');
+  });
+};
+createUsernames(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -179,3 +196,38 @@ displayMovements(account1.movements);
 //   console.log(`${key}: ${value}`);
 // });
 // // keeps the "key" parameter even though it isn't relevant for a Set for consistency
+
+// const deposits = movements.filter(function (mov) {
+//   return mov > 0;
+// });
+// console.log(deposits);
+
+// const depositsFor = [];
+// for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+
+// console.log(depositsFor);
+
+//--------------- REDUCE ---------------------
+// console.log(movements);
+// const balance = movements.reduce(function (acc, cur, i, arr) {
+//   console.log(`Iteration ${i}: ${acc}`);
+//   return acc + cur;
+// }, 0);
+// // Second argument of reduce is the initial value of the accumulator
+// console.log(balance);
+
+// let balance2 = 0;
+// for (const mov of movements) balance2 += mov;
+// console.log(balance2);
+
+// const balanceArr = movements.reduce((acc, cur) => acc + cur, 0);
+// console.log(balanceArr);
+
+// Maximum value
+// const max = movements.reduce(
+//   (acc, mov) => (acc > mov ? acc : mov),
+//   movements[0]
+// );
+// console.log(max);
+
+///////////////////////////////////////////////////
