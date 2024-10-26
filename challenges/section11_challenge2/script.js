@@ -36,7 +36,7 @@ const data2 = [16, 6, 10, 5, 6, 1, 4];
 console.log(calcAverageHumanAge(data1));
 console.log(calcAverageHumanAge(data2));
 
-// Rewrite above using arrow functions and chaining
+// Challenge 3: Rewrite above using arrow functions and chaining
 const calcAvgHumanAgeArr = (dogAges) => {
   return dogAges
     .map((dogAge) => (dogAge > 2 ? dogAge * 4 + 16 : dogAge * 2))
