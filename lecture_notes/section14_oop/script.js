@@ -230,29 +230,69 @@
 
 //------------------OBJECT.CREATE------------------------
 
-const PersonProto = {
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  },
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   },
 
-  init(firstName, birthYear) {
-    this.firstName = firstName;
-    this.birthYear = birthYear;
-  },
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
+
+// const steven = Object.create(PersonProto);
+// console.log(steven);
+// steven.name = 'Steven';
+// steven.birthYear = 2002;
+// steven.calcAge();
+
+// // Object.create is the least used way of creating objects
+
+// console.log(steven.__proto__ === PersonProto);
+
+// const sarah = Object.create(PersonProto);
+// sarah.init('Sarah', 2020);
+// sarah.calcAge();
+
+// // Object creates a new object using the prototype we provide
+//////////////////////////////////////////////////////////////
+
+//------------------Constructor Functions and Inheritance-------------------------
+
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
 };
 
-const steven = Object.create(PersonProto);
-console.log(steven);
-steven.name = 'Steven';
-steven.birthYear = 2002;
-steven.calcAge();
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
 
-// Object.create is the least used way of creating objects
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
 
-console.log(steven.__proto__ === PersonProto);
+// Linking prototypes
+// Student.prototype = Object.create(Person.prototype);
+// This has to be set before adding methods because it would wipe out any methods already created.
 
-const sarah = Object.create(PersonProto);
-sarah.init('Sarah', 2020);
-sarah.calcAge();
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
 
-// Object creates a new object using the prototype we provide
+const mike = new Student('Mike', 2020, 'Computer Science');
+console.log(mike);
+mike.introduce();
+// mike.calcAge();
+
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+console.log(mike instanceof Object);
+
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
