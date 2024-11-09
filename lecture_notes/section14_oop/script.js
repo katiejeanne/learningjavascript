@@ -260,39 +260,253 @@
 
 //------------------Constructor Functions and Inheritance-------------------------
 
-const Person = function (firstName, birthYear) {
-  this.firstName = firstName;
-  this.birthYear = birthYear;
-};
+// const Person = function (firstName, birthYear) {
+//   this.firstName = firstName;
+//   this.birthYear = birthYear;
+// };
 
-Person.prototype.calcAge = function () {
-  console.log(2037 - this.birthYear);
-};
+// Person.prototype.calcAge = function () {
+//   console.log(2037 - this.birthYear);
+// };
 
-const Student = function (firstName, birthYear, course) {
-  Person.call(this, firstName, birthYear);
-  this.course = course;
-};
+// const Student = function (firstName, birthYear, course) {
+//   Person.call(this, firstName, birthYear);
+//   this.course = course;
+// };
 
-// Linking prototypes
-// Student.prototype = Object.create(Person.prototype);
-// This has to be set before adding methods because it would wipe out any methods already created.
+// // Linking prototypes
+// // Student.prototype = Object.create(Person.prototype);
+// // This has to be set before adding methods because it would wipe out any methods already created.
 
-Student.prototype.introduce = function () {
-  console.log(`My name is ${this.firstName} and I study ${this.course}`);
-};
+// Student.prototype.introduce = function () {
+//   console.log(`My name is ${this.firstName} and I study ${this.course}`);
+// };
 
-const mike = new Student('Mike', 2020, 'Computer Science');
-console.log(mike);
-mike.introduce();
-// mike.calcAge();
+// const mike = new Student('Mike', 2020, 'Computer Science');
+// console.log(mike);
+// mike.introduce();
+// // mike.calcAge();
 
-console.log(mike.__proto__);
-console.log(mike.__proto__.__proto__);
+// console.log(mike.__proto__);
+// console.log(mike.__proto__.__proto__);
 
-console.log(mike instanceof Student);
-console.log(mike instanceof Person);
-console.log(mike instanceof Object);
+// console.log(mike instanceof Student);
+// console.log(mike instanceof Person);
+// console.log(mike instanceof Object);
 
-Student.prototype.constructor = Student;
-console.dir(Student.prototype.constructor);
+// Student.prototype.constructor = Student;
+// console.dir(Student.prototype.constructor);
+//////////////////////////////////////////////////////
+
+//-----------------------ES6 Classes and Inheritance---------------------------
+
+// class PersonCl {
+//   constructor(fullName, birthYear) {
+//     this.fullName = fullName;
+//     this.birthYear = birthYear;
+//   }
+
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   }
+
+//   // no commas between methods
+
+//   greet() {
+//     console.log(`Hey ${this.firstName}`);
+//   }
+
+//   get age() {
+//     return 2037 - this.birthYear;
+//   }
+
+//   set fullName(name) {
+//     if (name.includes(' ')) this._fullName = name;
+//     else alert(`${name} is not a full name.`);
+//   }
+
+//   get fullName() {
+//     return this._fullName;
+//   }
+
+//   // Set a static using Class syntax by using static keyword
+//   static hey() {
+//     console.log('Hey there!');
+//     console.log(this);
+//   }
+// }
+
+// class StudentCl extends PersonCl {
+//   constructor(fullName, birthYear, course) {
+//     // Super always must be called first to create the context
+//     // If no addition to super's constructor, do not need a constructor
+//     super(fullName, birthYear);
+//     this.course = course;
+//   }
+
+//   introduce() {
+//     console.log(`My name is ${this.fullName} and I study ${this.course}`);
+//   }
+
+//   calcAge() {
+//     console.log(`I'm just a baby, I'm ${this.age - 10}`);
+//   }
+// }
+
+// const martha = new StudentCl('Martha Jones', 2012, 'Computer Science');
+// martha.introduce();
+// martha.calcAge();
+/////////////////////////////////////////////////////////////////
+
+//-------------------------Object.create and Inheritance-----------------------
+
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2037 - this.birthYear);
+//   },
+
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   },
+// };
+
+// const steven = Object.create(PersonProto);
+
+// const StudentProto = Object.create(PersonProto);
+// StudentProto.init = function (firstName, birthYear, course) {
+//   PersonProto.init.call(this, firstName, birthYear);
+//   this.course = course;
+// };
+
+// StudentProto.introduce = function () {
+//   console.log(`My name is ${this.firstName} and I study ${this.course}`);
+// };
+
+// const jay = Object.create(StudentProto);
+// jay.init('Jay', 2010, 'Computer Science');
+// jay.introduce();
+// jay.calcAge();
+////////////////////////////////////////////////////////////////////////////////
+
+//--------------Class Example----------------------
+
+// class Account {
+//   constructor(owner, currency, pin) {
+//     this.owner = owner;
+//     this.currency = currency;
+//     this._pin = pin;
+//     // protected by convention
+//     this._movements = [];
+//     this.local = navigator.language;
+
+//     console.log(`Account is open. Thanks, ${this.owner}!`);
+//   }
+
+//   // Public interface
+//   getMovements() {
+//     return this._movements;
+//   }
+
+//   deposit(val) {
+//     this._movements.push(val);
+//   }
+
+//   withdraw(val) {
+//     this.deposit(-val);
+//   }
+
+//   // Underscore signifies this is a private method
+//   _approveLoan(val) {
+//     return true;
+//   }
+
+//   requestLoan(val) {
+//     if (this._approveLoan(val)) {
+//       this.deposit(val);
+//       console.log('Loan approved');
+//     }
+//   }
+// }
+
+// const acc1 = new Account('Jonas', 'EUR', 1111);
+
+// // This is a bad idea. Access properties with methods, not directly.
+// // acc1.movements.push(250);
+// // acc1.movements.push(-140);
+// // console.log(acc1);
+
+// acc1.deposit(250);
+// acc1.withdraw(140);
+// acc1.requestLoan(1000);
+
+// console.log(acc1);
+
+// console.log(acc1.pin);
+////////////////////////////////////////////////////////////////
+
+// ------------------------Class Fields (Official in 2022)-----------------------
+class Account {
+  // Public field
+  locale = navigator.language;
+
+  // Private fields
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+    // protected by convention
+    // this._movements = [];
+    // this.local = navigator.language;
+
+    console.log(`Account is open. Thanks, ${this.owner}!`);
+  }
+
+  // Public methods - these haven't really changed
+  getMovements() {
+    return this.#movements;
+  }
+
+  deposit(val) {
+    this.#movements.push(val);
+    return this;
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+    return this;
+  }
+
+  requestLoan(val) {
+    if (this.#approveLoan(val)) {
+      this.deposit(val);
+      console.log('Loan approved');
+      return this;
+    }
+  }
+
+  static helper() {
+    console.log('helping');
+  }
+
+  // Private methods
+  #approveLoan(val) {
+    return true;
+  }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+// console.log(acc1.#movements);
+
+console.log(acc1);
+// console.log(acc1.#approveLoan(100));  Throws an error
+Account.helper();
+/////////////////////////////////////////////////////////////////////
+
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+// To chain return "this" in the method
+
+console.log(acc1.getMovements());
