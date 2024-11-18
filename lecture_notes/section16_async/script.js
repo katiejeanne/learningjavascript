@@ -62,7 +62,7 @@ const renderCountry = function (data, className = '') {
     `;
 
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  //   countriesContainer.style.opacity = 1;
+  countriesContainer.style.opacity = 1;
 };
 
 // const getCountryAndNeighbor = function (country) {
@@ -117,10 +117,10 @@ const renderCountry = function (data, className = '') {
 // );
 // console.log(request);
 
-const renderError = function (msg) {
-  countriesContainer.insertAdjacentText('beforeend', msg);
-  //   countriesContainer.style.opacity = 1;
-};
+// const renderError = function (msg) {
+//   countriesContainer.insertAdjacentText('beforeend', msg);
+//   //   countriesContainer.style.opacity = 1;
+// };
 
 const getJSON = function (url, errorMsg = 'Something went wrong') {
   return fetch(url).then((response) => {
@@ -187,8 +187,53 @@ const getCountryData = function (country) {
     });
 };
 
-btn.addEventListener('click', function () {
-  getCountryData('portugal');
-});
+// btn.addEventListener('click', function () {
+//   getCountryData('portugal');
+// });
 
-getCountryData('taiwan');
+// getCountryData('taiwan');
+
+// console.log('Test start');
+// setTimeout(() => console.log('0 sec timer'), 0);
+// Promise.resolve('Resolved promise 1').then((res) => console.log(res));
+// Promise.resolve('Resolved promise 2').then((res) => {
+//   for (let i = 0; i < 10000000000; i++) {}
+//   console.log(res);
+// });
+// console.log('Test end');
+
+// Promise takes exactly one argument, which is the executor function
+// The executor function takes two arguments - resolve and reject which are functions
+//
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   (position) => resolve(position),
+    //   (err) => reject(err)
+    // );  Same as below
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+getPosition().then((pos) => console.log(pos));
+
+const whereAmI = function (lat, long) {
+  getPosition()
+    .then((pos) => {
+      const { latitude: lat, longitude: long } = pos.coords;
+      return fetch(`https://geocode.xyz/${lat},${long}?geoit=json`);
+    })
+    .then((response) => {
+      if (!response.ok) throw new Error(`Problem with geocoding ${res.status}`);
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      console.log(`You are in ${data.city}, ${data.country}`);
+      getCountryData(data.country);
+    })
+    .catch((error) => console.log(error));
+};
+
+btn.addEventListener('click', whereAmI);
